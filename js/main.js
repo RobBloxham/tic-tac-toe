@@ -1,9 +1,4 @@
 
-// board array represents squares
-// 3) Store elements on the page that will be accessed in code more than once in variables to make code more concise, readable and performant:
-// 	3.1) Store the 9 elements that represent the squares on the page.
-
-
 /*------Constants------*/
 const colors = {
     '1': 'royalpurple',
@@ -20,7 +15,7 @@ const winningCombo = [
 [0, 4, 8],
 [2, 4, 6]
 ];
-}
+
 
 /*------Variables (state)------*/
 
@@ -32,8 +27,9 @@ let board, turn, winner
 
 
 // You might choose to put your game status here
-const messageEl = document./* where is message stored*/
-const squaresEl = document./*where is the square and what to grab*/
+const messageEl = document.getElementById('message') 
+const squaresEl = document.querySelector('section', 'div')
+const resetBtn = document.getElementById('resetButton')
 /*------Event Listeners------*/
 
 // This is where you should put the event listener
@@ -58,6 +54,10 @@ document./*where am i adding event listener this one is reset button*/.addEventL
 function init(){
 
 }
+
+
+
+
 // On-Click function:
 // Set up what happens when one of the elements
 // is clicked
@@ -80,6 +80,8 @@ function init(){
 function playerMove(){
 
 }
+
+
 
 // Check winner function:
 // Checks the current state of the board for
