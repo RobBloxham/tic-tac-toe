@@ -56,7 +56,7 @@ init()
 function init(){
     board = [null, null, null, null, null, null, null, null, null]
     turn = 1
-    winner = null
+    winner = checkWinner()
     render()
 }
 
@@ -99,8 +99,8 @@ function playerMove(e){
 // a winner and changes the state of the winner
 // variable if so
 function checkWinner(){
-    for (let i = 0; i < winningCombo.length, i++;) {
-        if (Math.abs(board[winningCombo[i][0]] + board[winningCombo[i][1]] + board[winningCombo[i][2]]) === 3) return board[winningCombno[i][0]]
+    for (let i = 0; i < winningCombo.length; i++) {
+        if (Math.abs(board[winningCombo[i][0]] + board[winningCombo[i][1]] + board[winningCombo[i][2]]) === 3) return board[winningCombo[i][0]];
     }
     if (board.includes(null)) return null
     return 'T'
@@ -127,7 +127,7 @@ function render(){
     if (winner === 'T'){
         messageEl.innerHTML = 'You have tied!'
      } else if (winner){
-        messageEl.innerHTML = `Congrat to ${colors[winner].toUpperCase()} you are the winner!`
+        messageEl.innerHTML = `Congrats to ${colors[winner].toUpperCase()} you are the winner!`
     } else {
         messageEl.innerHTML = `It is ${colors[turn].toUpperCase()}'s turn`
     }
