@@ -131,7 +131,7 @@ function render(){
         squaresEl[idx].style.background = colors[sq]
     })
     if (winner === 'T'){
-        messageEl.innerHTML = 'Your game has ended in a tie have tied!'
+        messageEl.innerHTML = 'Your game has ended in a tie!'
         setTimeout(function(){priceIsWrong.play();},500);
      } else if (winner){
         messageEl.innerHTML = `Congrats to ${colors[winner].toUpperCase()} you are the winner!`
