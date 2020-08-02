@@ -60,6 +60,7 @@ function init(){
     turn = 1
     winner = checkWinner()
     render()
+    messageEl.className = "no bounce"
 }
 
 
