@@ -1,19 +1,19 @@
 
 /*------Constants------*/
 const colors = {
-    '1': 'royalpurple',
+    '1': 'purple',
     '-1': 'yellow',
     'null': 'white'
 }
 const winningCombo = [
-[0, 1, 2],
-[3, 4, 5],
-[6, 7, 8],
-[0, 3, 6],
-[1, 4, 7],
-[2, 5, 8],
-[0, 4, 8],
-[2, 4, 6]
+    [0, 1, 2],
+    [3, 4, 5],
+    [6, 7, 8],
+    [0, 3, 6],
+    [1, 4, 7],
+    [2, 5, 8],
+    [0, 4, 8],
+    [2, 4, 6]
 ];
 
 
@@ -28,20 +28,22 @@ let board, turn, winner
 
 // You might choose to put your game status here
 const messageEl = document.getElementById('message') 
-const squaresEl = document.querySelector('section', 'div')
+const squaresEl = document.querySelectorAll('div')
 const resetBtn = document.getElementById('resetButton')
 /*------Event Listeners------*/
 
 // This is where you should put the event listener
 // for a mouse-click
-document./*where am i adding event listener this one is for the square*/.addEventListener('click',/*whats it gonna do */)
+document.querySelector('section').addEventListener('click', playerMove)
+
+
 // 6) Handle a player clicking the replay button:
 // 	6.1) Do steps 4.1 (initialize the state variables) and 4.2 (render).
-document./*where am i adding event listener this one is reset button*/.addEventListener('click'/* whats the button gonna do*/)
+resetBtn.addEventListener('click', init)
 
 /*------Functions------*/
 
-
+init()
 // Some functions you might choose to use:
 
 // Initialization function:
@@ -52,7 +54,10 @@ document./*where am i adding event listener this one is reset button*/.addEventL
 // 		4.1.2) Initialize whose turn it is to 1 (player 'X'). Player 'O' will be represented by -1.
 // 		4.1.3) Initialize winner to null to represent that there is no winner or tie yet. Winner will hold the player value (1 or -1) if there's a winner. Winner will hold a 'T' if there's a tie. 
 function init(){
-
+    board = [null, null, null, null, null, null, null, null, null]
+    turn = 1
+    winner = null
+    render()
 }
 
 
@@ -69,7 +74,18 @@ function init(){
 // 	5.3) If winner is not null, immediately return because the game is over.
 // 	5.4) Update the board array at the index with the value of turn.
 // 	5.5) Flip turns by multiplying turn by -1 (flips a 1 to -1, and vice-versa).
-// 	5.6) Set the winner variable if there's a winner:
+
+
+function playerMove(e){
+    const idx = parseInt(e.target.id.replace('sq', ''))
+    if (board[idx] || winner) return
+    board[idx] = turn
+    turn *= -1
+    winner = checkWinner()
+    render()
+}
+
+//this is calling on another function will be its own function rather than a nested function incase we need to call on this functin elsewhere  5.6) Set the winner variable if there's a winner:
 // 		5.6.1) Loop through the each of the winning combination arrays defined.
 // 		5.6.2) Total up the three board positions using the three indexes in the current combo.
 // 		5.6.3) Convert the total to an absolute value (convert any negative total to positive).
@@ -77,18 +93,17 @@ function init(){
 // 	5.7) If there's no winner, check if there's a tie:
 // 		5.7.1) Set winner to 'T' if there are no more nulls in the board array.
 // 	5.8) All state has been updated, so render the state to the page (step 4.2).
-function playerMove(){
-
-}
-
-
 
 // Check winner function:
 // Checks the current state of the board for
 // a winner and changes the state of the winner
 // variable if so
 function checkWinner(){
-
+    for (let i = 0; i < winningCombo.length, i++;) {
+        if (Math.abs(board[winningCombo[i][0]] + board[winningCombo[i][1]] + board[winningCombo[i][2]]) === 3) return board[winningCombno[i][0]]
+    }
+    if (board.includes(null)) return null
+    return 'T'
 }
 
 // Render function:
@@ -106,5 +121,14 @@ function checkWinner(){
 // 			4.2.2.3) Otherwise, render a congratulatory message to which player has won - use the color name for the player, converting it to uppercase.
 // 	4.3) Wait for the user to click a square
 function render(){
-
-}
+    board.forEach(function(sq, idx){
+        squaresEl[idx].style.background = colors[sq]
+    })
+    if (winner === 'T'){
+        messageEl.innerHTML = 'You have tied!'
+     } else if (winner){
+        messageEl.innerHTML = `Congrat to ${colors[winner].toUpperCase()} you are the winner!`
+    } else {
+        messageEl.innerHTML = `It is ${colors[turn].toUpperCase()}'s turn`
+    }
+};
