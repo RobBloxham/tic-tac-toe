@@ -3,7 +3,7 @@
 const colors = {
     '1': 'purple',
     '-1': 'yellow',
-    'null': 'white'
+    'null': 'white',
 }
 const winningCombo = [
     [0, 1, 2],
@@ -15,7 +15,9 @@ const winningCombo = [
     [0, 4, 8],
     [2, 4, 6]
 ];
-
+const priceIsWrong = new Audio('audio/Price-is-right-losing-horn.wav')
+const blip = new Audio('audio/blip.wav')
+const airhorn = new Audio('audio/airhorn.wav')
 
 /*------Variables (state)------*/
 
@@ -78,6 +80,7 @@ function init(){
 
 function playerMove(e){
     const idx = parseInt(e.target.id.replace('sq', ''))
+    setTimeout(function(){blip.play();},0);
     if (board[idx] || winner) return
     board[idx] = turn
     turn *= -1
@@ -126,8 +129,12 @@ function render(){
     })
     if (winner === 'T'){
         messageEl.innerHTML = 'You have tied!'
+        setTimeout(function(){priceIsWrong.play();},500);
      } else if (winner){
         messageEl.innerHTML = `Congrats to ${colors[winner].toUpperCase()} you are the winner!`
+        setTimeout(function(){airhorn.play();},0);
+        confetti.start(1500)
+        messageEl.className = "animate__animated animate__bounce"
     } else {
         messageEl.innerHTML = `It is ${colors[turn].toUpperCase()}'s turn`
     }
