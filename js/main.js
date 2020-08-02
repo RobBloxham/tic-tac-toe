@@ -36,6 +36,9 @@ const resetBtn = document.getElementById('resetButton')
 
 // This is where you should put the event listener
 // for a mouse-click
+// On-Click 
+// Set up what happens when one of the elements
+// is clicked
 document.querySelector('section').addEventListener('click', playerMove)
 
 
@@ -66,9 +69,7 @@ function init(){
 
 
 
-// On-Click function:
-// Set up what happens when one of the elements
-// is clicked
+
 // 5) Handle a player clicking a square:
 // 	5.1) Obtain the index of the square that was clicked by either:
 // 		5.1.1) "Extracting" the index from an id assigned to the element in the HTML, or
@@ -89,14 +90,15 @@ function playerMove(e){
     render()
 }
 
-//this is calling on another function will be its own function rather than a nested function incase we need to call on this functin elsewhere  5.6) Set the winner variable if there's a winner:
+//this is calling on another function will be its own function rather than a nested function incase we need to call on this function elsewhere  
+//      5.6) Set the winner variable if there's a winner:
 // 		5.6.1) Loop through the each of the winning combination arrays defined.
 // 		5.6.2) Total up the three board positions using the three indexes in the current combo.
-// 		5.6.3) Convert the total to an absolute value (convert any negative total to positive).
-// 		5.6.4) If the total equals 3, we have a winner! Set winner to the board's value at the index specified by the first index in the combo array. Exit the loop.
+// 		5.6.3) Convert the total to an absolute value (convert any negative total to positive). done with Math.abs
+// 		5.6.4) If the total equals 3, we have a winner! Set winner to the board's value at the index specified by the first index in the combo array. Exit the loop. for loop 
 // 	5.7) If there's no winner, check if there's a tie:
-// 		5.7.1) Set winner to 'T' if there are no more nulls in the board array.
-// 	5.8) All state has been updated, so render the state to the page (step 4.2).
+// 		5.7.1) Set winner to 'T' if there are no more nulls in the board array. simply return T 
+// 	5.8) All state has been updated, so render the state to the page (step 4.2). playe rmove already renders it does not need to be called again here
 
 // Check winner function:
 // Checks the current state of the board for
@@ -115,8 +117,8 @@ function checkWinner(){
 // on the page, updating the elements to reflect
 // either X or O depending on whose turn it is
 // 	4.2) Render those state variables to the page:
-// 		4.2.1) Render the board:
-// 			4.2.1.1) Loop over each of the 9 elements that represent the squares on the page, and for each iteration:
+// 		4.2.1) Render the board:  this will be a for each loop
+// 			4.2.1.1) Loop over each of the 9 elements that represent the squares on the page, and for each iteration: 
 // 				4.2.1.1.2) Use the index of the iteration to access the mapped value from the board array.
 // 				4.3.1.1.3) Set the background color of the current element by using the value as a key on the colors lookup object (constant).
 // 		4.2.2) Render a message:
@@ -129,7 +131,7 @@ function render(){
         squaresEl[idx].style.background = colors[sq]
     })
     if (winner === 'T'){
-        messageEl.innerHTML = 'You have tied!'
+        messageEl.innerHTML = 'Your game has ended in a tie have tied!'
         setTimeout(function(){priceIsWrong.play();},500);
      } else if (winner){
         messageEl.innerHTML = `Congrats to ${colors[winner].toUpperCase()} you are the winner!`
