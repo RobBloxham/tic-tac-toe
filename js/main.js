@@ -17,7 +17,7 @@ const winningCombo = [
 ];
 const priceIsWrong = new Audio('audio/Price-is-right-losing-horn.wav')
 const blip = new Audio('audio/blip.wav')
-const airhorn = new Audio('audio/airhorn.wav')
+const kazoo = new Audio('audio/kazoo.wav')
 
 /*------Variables (state)------*/
 
@@ -133,8 +133,8 @@ function render(){
         setTimeout(function(){priceIsWrong.play();},500);
      } else if (winner){
         messageEl.innerHTML = `Congrats to ${colors[winner].toUpperCase()} you are the winner!`
-        setTimeout(function(){airhorn.play();},0);
-        confetti.start(1500)
+        setTimeout(function(){kazoo.play();},0);
+        confetti.start(3800)
         messageEl.className = "animate__animated animate__bounce"
     } else {
         messageEl.innerHTML = `It is ${colors[turn].toUpperCase()}'s turn`
